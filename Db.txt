@@ -1,0 +1,3 @@
+create table tempNow(id int PRIMARY key AUTO_INCREMENT,cityid varchar(20),temp float,timeNow datetime)
+create table twodayweather(id int PRIMARY key AUTO_INCREMENT,cityid int,descriptionT int,Description varchar(50),startTime datetime,endTime datetime)
+
