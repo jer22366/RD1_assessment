@@ -60,10 +60,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php while($show=mysqli_fetch_assoc($result)){?>
+                <?php while($show=mysqli_fetch_assoc($result)){
+                    $des=explode("。",$show["Description"]);
+                    
+                    ?>
                     <tr>
                         <td><?php echo $show["descriptionT"]."  度" ?></td>
-                        <td><?php echo $show["Description"] ?></td>
+                        <td><?php  for($i=0;$i<3;$i++) 
+                                        echo $des[$i]."  ";
+                                    echo $des[3];
+                        ?></td>
                         <td><?php echo $show["startTime"] ?></td>
                         <td><?php echo week($show["week"]) ?></td>
                 </tr>
