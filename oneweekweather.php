@@ -49,12 +49,16 @@
         sqlcommand;
         $result = mysqli_query ( $link, $getweather );
     }
-
-    $showoneweek = <<<sqlcommand
-        select * from oneweekweather
-    sqlcommand;
-    $result = mysqli_query ( $link, $showoneweek );
-    while($oneweek = mysqli_fetch_assoc($result)){
-         echo $oneweek["description"];
+}
+    if(isset($_GET["id"])){
+        $id = $_GET["id"];
+        $showtempNow = <<<sqlcommand
+            select Description,MinT,MaxT,startTime from oneweekweather where cityid= $id
+        sqlcommand;
+        $result = mysqli_query ( $link, $showtempNow );
+        while($show=mysqli_fetch_assoc($result)){
+            echo "預測：".$show["Description"]." 最高溫：".$show["MaxT"]."最低溫:".$show["MinT"]."日期:".$show["startTime"]."<br>";
     }
-} 
+}
+
+?> 

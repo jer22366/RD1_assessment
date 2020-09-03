@@ -24,7 +24,7 @@
         TRUNCATE table rain;   
     sqlcommand;
     $result = mysqli_query ( $link, $delete );
-
+    
     foreach($data["records"]["location"] as $i){//雨量
             $time = $i["time"]["obsTime"];
             $city = $i["parameter"][0]["parameterValue"];
@@ -32,17 +32,26 @@
             $onedayrain = $i["weatherElement"][1]["elementValue"];
             
             $getrain = <<<sqlcommand
-                INSERT INTO `rain`(`city`, `onehourRain`,`onedayhour`, `rainDate`) VALUES ("$city",$onehourrain,$onedayrain,"$time")
+                INSERT INTO `rain`(`cityId`, `onehourRain`,`onedayRain`, `rainDate`) VALUES ((select cityid from city where city="$city"),$onehourrain,$onedayrain,"$time")
             sqlcommand;
             $result = mysqli_query ( $link, $getrain );
             
         } 
         
-        $showrain = <<<sqlcommand
-            select * from rain
-        sqlcommand;
-        $result = mysqli_query ( $link, $showrain );
-        while($rain = mysqli_fetch_assoc($result)){
-            echo $rain["onehourRain"];
-        }
+        if(isset($_GET["id"])){
+            $id = $_GET["id"];
+                    $showOneDay = <<<sqlcommand
+                        SELECT avg(onedayRain) as DayRain FROM `rain` where cityId=$id and onedayRain>=0
+                    sqlcommand;
+                    $showD = mysqli_fetch_assoc(mysqli_query ( $link, $showOneDay ));
+                    $showOneHour = <<<sqlcommand
+                        SELECT avg(onehourRain) as HourRain FROM `rain` where cityId=$id and onehourRain>=0
+                    sqlcommand;
+                    $showH = mysqli_fetch_assoc(mysqli_query ( $link, $showOneHour ));
+                    if($showH["HourRain"]=="")
+                        $showH["HourRain"]=0;
+                    echo "一天雨量：".$showD["DayRain"]." ,每小時雨量：".$showH["HourRain"];
+                }
+            
+            
  ?>

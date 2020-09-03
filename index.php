@@ -11,7 +11,7 @@
 <body>
 <form>
   <div class="form-group row">
-    <label for="cityName" class="col-4 col-form-label">Select</label> 
+    <label for="cityName" class="col-4 col-form-label">請選擇縣市</label> 
     <div class="col-8">
       <select id="cityName" name="cityName" class="custom-select">
         <option value="1">雲林縣</option>
@@ -37,109 +37,41 @@
         <option value="21">嘉義縣</option>
         <option value="22">嘉義市</option>
       </select>
-
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="cityName" class="col-4 col-form-label">請選擇內容</label> 
+    <div class="col-8">
       <select id="menu" name="menu" class="custom-select">
-        <option value="30">當前天氣</option>
-        <option value="31">一週天氣預報</option>
-        <option value="32">明後兩天預報</option>
-        <option value="33">雨量查詢</option>
-        
+        <option value="tempNow">當前天氣</option>
+        <option value="oneweekweather">一週天氣預報</option>
+        <option value="twodayweather">明後兩天預報</option>
+        <option value="rain">雨量查詢</option>
       </select>
     </div>
   </div> 
 </form>
-        <div id='alarm'></div>
-        <div id='test'></div>
-        <!-- <div id='test1'></div>
-        <div id='test2'></div>  -->
+        <div id='debug'></div>
 </body>
 <script>
-  $(function(){
- setInterval(getTempNow,1000);
- setInterval(getrain,10000);
-//  setInterval(getoneweek,10000);
-//  setInterval(gettwoday,10000);
- 
-})
-function getTempNow (){
- let getcityId=$("#cityName option:selected").val();
- let getmenu=$("#menu option:selected").val();
- $.ajax({
-   type: 'GET',                     //GET or POST
-   url: `tempNow.php?id=${getcityId}&menu=${getmenu}`,  //請求的頁面
-   cache: false,   //是否使用快取
-   dataType : 'text',
-   success: function(result){   //處理回傳成功事件，當請求成功後此事件會被呼叫
-  //alert(result);
-  //$('#title').text(result);
-  $('#alarm').text(result);
-   },
-   error: function(result){   //處理回傳錯誤事件，當請求失敗後此事件會被呼叫
-  //your code here
-  alert("getTempNow發生錯誤");
-  console.log(result);
-   },
-       });
-}
+    $(document).ready(function(){
+		function setting(){	
+            let selecterletter = $("#cityName option:selected").val();
+            let filename = $("#menu option:selected").val();
+			let serverurl = `${filename}.php?id=${selecterletter}`;
+			$.ajax({
+				type: "get",
+                url: serverurl
+                
+			}).then(function(e){
+                $("#debug").html(e)
+			})
+		}
+        $("#cityName").change(setting); //觸發時重複呼叫
+        $("#menu").change(setting); 
+        setting();
+	})
 
-function getrain (){
-  let getcityId=$("#cityName option:selected").val();
-  let getmenu=$("#menu option:selected").val();
- $.ajax({
-   type: 'GET',                     //GET or POST
-   url: `tempNow.php?id=${getcityId}&menu=${getmenu}`,  //請求的頁面
-   cache: false,   //是否使用快取
-   dataType : 'text',
-   success: function(result){   //處理回傳成功事件，當請求成功後此事件會被呼叫
-  //alert(result);
-  //$('#title').text(result);
-  $('#test').text(result);
-   },
-   error: function(result){   //處理回傳錯誤事件，當請求失敗後此事件會被呼叫
-  //your code here
-  alert("getrain發生錯誤");
-  console.log(result);
-   },
-       });
-}
-
-function getoneweek (){
- $.ajax({
-   type: 'GET',                     //GET or POST
-   url: "oneweekweather.php",  //請求的頁面
-   cache: false,   //是否使用快取
-   dataType : 'text',
-   success: function(result){   //處理回傳成功事件，當請求成功後此事件會被呼叫
-  //alert(result);
-  //$('#title').text(result);
-  $('#test1').text(result);
-   },
-   error: function(result){   //處理回傳錯誤事件，當請求失敗後此事件會被呼叫
-  //your code here
-  alert("getoneweek發生錯誤");
-  console.log(result);
-   },
-       });
-}
-
-function gettwoday (){
- $.ajax({
-   type: 'GET',                     //GET or POST
-   url: "twodayweather.php",  //請求的頁面
-   cache: false,   //是否使用快取
-   dataType : 'text',
-   success: function(result){   //處理回傳成功事件，當請求成功後此事件會被呼叫
-  //alert(result);
-  //$('#title').text(result);
-  $('#test2').text(result);
-   },
-   error: function(result){   //處理回傳錯誤事件，當請求失敗後此事件會被呼叫
-  //your code here
-  alert("gettwoday發生錯誤");
-  console.log(result);
-   },
-       });
-}
 </script>
 
 </html>

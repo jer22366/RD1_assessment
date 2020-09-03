@@ -1,6 +1,4 @@
 <?php
-        
-        
         header("content-type: text/html; charset=utf-8");
         require_once ("config.php");
         // 1. 初始設定
@@ -38,24 +36,20 @@
                     sqlcommand;
                     $result = mysqli_query ( $link, $tempNow );
                 } 
-                if(isset($_GET["id"]) && $_GET["menu"]){
+                if(isset($_GET["id"])){
                     $id = $_GET["id"];
-                    $menu = $_GET["menu"];
-                    if($menu==30){
                         if($id!=15){
                             $showtempNow = <<<sqlcommand
-                                select date_format(now(),"%m-%d %h:%i") as timeNow,round(avg(temp)) as temp from tempNow where cityid= $id and temp!=-99 group by timeNow
+                                select date_format(now(),"%m-%d %h:%i") as timeNow,round(avg(temp)) as temp,WEEKDAY(timeNow) as week from tempNow where cityid= $id and temp!=-99 group by timeNow
                             sqlcommand;
                             $show = mysqli_fetch_assoc(mysqli_query ( $link, $showtempNow ));
-                            echo "現在時間：".$show["timeNow"]." ,溫度：".$show["temp"]."度";
+                            echo "現在時間：".$show["timeNow"]." 星期";
+                            echo week($show["week"])."  ";
+                            echo "溫度：".$show["temp"]."度" ;
                         }else{
                             echo("這裡沒有觀測站喔");
                         }
                     }
-                    
-                    
-                }
-                
- 
 
+                    
 ?>

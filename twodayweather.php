@@ -43,12 +43,14 @@
         } 
     }
     
-    
-    $tshowtwodayeather = <<<sqlcommand
-        select * from twodayweather
-    sqlcommand;
-    $result = mysqli_query ( $link, $tshowtwodayeather );
-    while($show = mysqli_fetch_assoc($result)){
-        echo $show["descriptionT"];
+    if(isset($_GET["id"])){
+        $id = $_GET["id"];
+        $showtempNow = <<<sqlcommand
+            select descriptionT,Description,startTime,endTime from twodayweather where cityid= $id
+        sqlcommand;
+        $result = mysqli_query ( $link, $showtempNow );
+        while($show=mysqli_fetch_assoc($result)){
+            echo "溫度：".$show["descriptionT"]." 預測：".$show["Description"]."日期:".$show["startTime"]."<br>";
+        }
     }
 ?>
