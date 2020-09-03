@@ -41,17 +41,30 @@
         if(isset($_GET["id"])){
             $id = $_GET["id"];
                     $showOneDay = <<<sqlcommand
-                        SELECT avg(onedayRain) as DayRain FROM `rain` where cityId=$id and onedayRain>=0
+                        SELECT round(avg(onedayRain),2) as DayRain  FROM `rain` where cityId=$id and onedayRain>=0
                     sqlcommand;
                     $showD = mysqli_fetch_assoc(mysqli_query ( $link, $showOneDay ));
                     $showOneHour = <<<sqlcommand
-                        SELECT avg(onehourRain) as HourRain FROM `rain` where cityId=$id and onehourRain>=0
+                        SELECT round(avg(onehourRain),2) as HourRain FROM `rain` where cityId=$id and onehourRain>=0
                     sqlcommand;
                     $showH = mysqli_fetch_assoc(mysqli_query ( $link, $showOneHour ));
                     if($showH["HourRain"]=="")
-                        $showH["HourRain"]=0;
-                    echo "一天雨量：".$showD["DayRain"]." ,每小時雨量：".$showH["HourRain"];
-                }
-            
-            
+                        $showH["HourRain"]="0.00";?>
+                    <div class="container"> 
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>一天雨量</th>
+                                <th>每小時雨量</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                    <td><?php echo $showD["DayRain"]  ?></td>
+                                    <td><?php echo $showH["HourRain"] ?></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </div>
+             <?php    }
  ?>

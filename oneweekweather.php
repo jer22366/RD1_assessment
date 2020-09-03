@@ -53,12 +53,36 @@
     if(isset($_GET["id"])){
         $id = $_GET["id"];
         $showtempNow = <<<sqlcommand
-            select Description,MinT,MaxT,startTime from oneweekweather where cityid= $id
+            select Description,MinT,MaxT,startTime,WEEKDAY(startTime) as week from oneweekweather where cityid= $id
         sqlcommand;
         $result = mysqli_query ( $link, $showtempNow );
-        while($show=mysqli_fetch_assoc($result)){
-            echo "預測：".$show["Description"]." 最高溫：".$show["MaxT"]."最低溫:".$show["MinT"]."日期:".$show["startTime"]."<br>";
-    }
-}
-
+            // echo "預測：".$show["Description"]." 最高溫：".$show["MaxT"]."最低溫:".$show["MinT"]."日期:".$show["startTime"];
+            // echo "  星期";
+            // echo week($show["week"])."<br>";
+?>
+            <div class="container"> 
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>預測：</th>
+                    <th>最低溫：</th>
+                    <th>最高溫：</th>
+                    <th>日期</th>
+                    <th>星期</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php while($show=mysqli_fetch_assoc($result)){?>
+                    <tr>
+                        <td><?php echo $show["Description"]?></td>
+                        <td><?php echo $show["MinT"] ?></td>
+                        <td><?php echo $show["MaxT"] ?></td>
+                        <td><?php echo $show["startTime"] ?></td>
+                        <td><?php echo week($show["week"]) ?></td>
+                </tr>
+            <?php }?>   
+                </tbody>
+            </table>
+            </div>
+    <?php }
 ?> 

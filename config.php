@@ -5,25 +5,25 @@
 	function week($day){
 		switch($day){
 			case 0: 
-				echo "一";
+				echo "星期一";
 				break;
 			case 1: 
-				echo "二";
+				echo "星期二";
 				break;
 			case 2: 
-				echo "三";
+				echo "星期三";
 				break;
 			case 3: 
-				echo "四";
+				echo "星期四";
 				break;
 			case 4: 
-				echo "五";
+				echo "星期五";
 				break;
 			case 5: 
-				echo "六";
+				echo "星期六";
 				break;
 			case 6: 
-				echo "日";
+				echo "星期日";
 				break;
 		}
 		

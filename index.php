@@ -6,7 +6,9 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>氣象資訊</title>
 </head>
 <body>
 <form>
@@ -51,6 +53,7 @@
     </div>
   </div> 
 </form>
+          
         <div id='debug'></div>
 </body>
 <script>
@@ -64,7 +67,8 @@
                 url: serverurl
                 
 			}).then(function(e){
-                $("#debug").html(e)
+            $("#debug").html(e);
+                
 			})
 		}
         $("#cityName").change(setting); //觸發時重複呼叫
