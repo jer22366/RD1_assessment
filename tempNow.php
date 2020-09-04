@@ -1,13 +1,71 @@
+<style>
+    img{
+        width:200px;
+        height:120px;
+    }
+</style>
+
 <?php
+    function showdata($id,$link,$result){
+        $Img = <<<sqlcommand
+                select cityImg from city where cityid=$id;
+            sqlcommand;
+            $showImg = mysqli_fetch_assoc(mysqli_query ( $link, $Img ));
+        if($id!=15){
+            $showtempNow = <<<sqlcommand
+                select date_format(now(),"%m-%d %h:%i") as timeNow,round(avg(temp)) as temp,WEEKDAY(timeNow) as week from tempNow where cityid= $id and temp!=-99 group by timeNow
+            sqlcommand; 
+            
+            $show = mysqli_fetch_assoc(mysqli_query ( $link, $showtempNow ));?>
+                <div class="container"> 
+                <table class="table table-hover">
+                <div >
+                    <img src="./image/<?php echo $showImg["cityImg"]?>"> 
+                    </div>
+                    <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>星期</th>
+                        <th>溫度</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><?php echo $show["timeNow"] ?></td>
+                            <td><?php echo week($show["week"]) ?></td>
+                            <td><?php echo $show["temp"]?></td>
+                    </tr>
+                    
+                    </tbody>
+                         
+                         
+                </table>
+                
+                </div>
+    <?php }else{?>
+                <div>
+                    <img src="./image/<?php echo $showImg["cityImg"]?>"
+                         srcset="small.jpg 500w"> 
+                </div>
+                 <?php echo("親 這裡沒有觀測站喔");
+        }
+        
+ }
+ 
     header("content-type: text/html; charset=utf-8");
     require_once ("config.php");
     if(isset($_GET["id"]))
         $id = $_GET["id"];
     // 1. 初始設定
     $showtempNow = <<<sqlcommand
-        select timeNow from tempNow where cityid= $id;
+        select timeNow from tempNow where id=1;
     sqlcommand;
-    if(date(i)%10==0){
+    $show = mysqli_fetch_assoc(mysqli_query ( $link, $showtempNow ));
+    $splitone=explode(" ",$show["timeNow"]);
+    $splittwo=explode(":",$splitone[1]);
+    $minute=date("i");
+    $hour=date("H");
+    if($hour>$splittwo[0] || $minute>$splittwo[1]+10 || $minute==0){
         $ch = curl_init();
     
         // 從檔案中讀取資料到PHP變數 
@@ -41,71 +99,13 @@
                 $result = mysqli_query ( $link, $tempNow );
 
             }
-                    if($id!=15){
-                        require_once ("config.php");
-                        $showtempNow = <<<sqlcommand
-                            select date_format(now(),"%m-%d %h:%i") as timeNow,round(avg(temp)) as temp,WEEKDAY(timeNow) as week from tempNow where cityid= $id and temp!=-99 group by timeNow
-                        sqlcommand;
-                        
-                        $show = mysqli_fetch_assoc(mysqli_query ( $link, $showtempNow ));?>
-                            <div class="container"> 
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th>日期</th>
-                                    <th>星期</th>
-                                    <th>溫度</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><?php echo $show["timeNow"] ?></td>
-                                        <td><?php echo week($show["week"]) ?></td>
-                                        <td><?php echo $show["temp"]?></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            </div>
-                <?php }else{
-                             echo("親這裡沒有觀測站喔");
-                }          
+            showdata($id,$link,$result);         
     }else{
-                if($id!=15){
-                    $showtempNow = <<<sqlcommand
-                        select date_format(now(),"%m-%d %h:%i") as timeNow,round(avg(temp)) as temp,WEEKDAY(timeNow) as week from tempNow where cityid= $id and temp!=-99 group by timeNow
-                    sqlcommand; 
-                    
-                    $show = mysqli_fetch_assoc(mysqli_query ( $link, $showtempNow ));?>
-                        <div class="container"> 
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th>日期</th>
-                                <th>星期</th>
-                                <th>溫度</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><?php echo $show["timeNow"] ?></td>
-                                    <td><?php echo week($show["week"]) ?></td>
-                                    <td><?php echo $show["temp"]?></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        </div>
-            <?php }else{
-                         echo("親這裡沒有觀測站喔");
-            }
-        }          
-    
-  ?>  
+           showdata($id,$link,$result);     
+        }?>  
 
         
     
-
-
-
     <!-- // $count=1;
     // $DBdata = <<<sqlcommand
     //         select timeNow from tempNow where id=1;

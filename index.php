@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,12 +10,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>氣象資訊</title>
+
+ 
 </head>
 <body>
 <form>
   <div class="form-group row">
-    <label for="cityName" class="col-4 col-form-label">請選擇縣市</label> 
-    <div class="col-8">
+    <div class="col-6">
       <select id="cityName" name="cityName" class="custom-select">
         <option value="1">雲林縣</option>
         <option value="2">南投縣</option>
@@ -40,28 +42,26 @@
         <option value="22">嘉義市</option>
       </select>
     </div>
-  </div>
-  <div class="form-group row">
-    <label for="cityName" class="col-4 col-form-label">請選擇內容</label> 
-    <div class="col-8">
+    <div class="col-6">
       <select id="menu" name="menu" class="custom-select">
         <option value="tempNow">當前天氣</option>
         <option value="oneweekweather">一週天氣預報</option>
         <option value="twodayweather">明後兩天預報</option>
         <option value="rain">雨量查詢</option>
       </select>
-    </div>
-  </div> 
+  </div>
+</div> 
 </form>
-          
         <div id='debug'></div>
 </body>
 <script>
     $(document).ready(function(){
+      var showimg =$("#cityName option:selected").val();
 		function setting(){	
-            let selecterletter = $("#cityName option:selected").val();
-            let filename = $("#menu option:selected").val();
+      let selecterletter = $("#cityName option:selected").val();
+      let filename = $("#menu option:selected").val();
 			let serverurl = `${filename}.php?id=${selecterletter}`;
+      $("img").attr("width","180");
 			$.ajax({
 				type: "get",
                 url: serverurl
@@ -75,7 +75,6 @@
         $("#menu").change(setting); 
         setting();
 	})
-
 </script>
 
 </html>
