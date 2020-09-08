@@ -56,12 +56,10 @@
 </body>
 <script>
     $(document).ready(function(){
-      var showimg =$("#cityName option:selected").val();
 		function setting(){	
       let selecterletter = $("#cityName option:selected").val();
       let filename = $("#menu option:selected").val();
 			let serverurl = `${filename}.php?id=${selecterletter}`;
-      $("img").attr("width","180");
 			$.ajax({
 				type: "get",
                 url: serverurl

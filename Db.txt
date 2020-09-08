@@ -5,4 +5,25 @@ create table twodayweather(id int PRIMARY key AUTO_INCREMENT,cityid int,descript
 create table rain(id int PRIMARY key AUTO_INCREMENT,cityId int,onehourRain float,onedayRain float,rainDate datetime	)
 create table oneweekweather(Id int PRIMARY key AUTO_INCREMENT,cityid int,description varchar(15),MinT int,MaxT int,startTime datetime,endTime datetime	)
 
-
+UPDATE `city` SET `cityImg` = 'Yunlin.jpeg' WHERE `city`.`cityId` = 1;
+UPDATE `city` SET `cityImg` = 'Nantou.jpeg' WHERE `city`.`cityId` = 2;
+UPDATE `city` SET `cityImg` = 'Lianjiang.jpeg' WHERE `city`.`cityId` = 3;
+UPDATE `city` SET `cityImg` = 'Taitung.jpeg' WHERE `city`.`cityId` = 4;
+UPDATE `city` SET `cityImg` = 'Kinmen.jpeg' WHERE `city`.`cityId` = 5;
+UPDATE `city` SET `cityImg` = 'Yilan.jpeg' WHERE `city`.`cityId` = 6;
+UPDATE `city` SET `cityImg` = 'Pingtung.jpeg' WHERE `city`.`cityId` = 7;
+UPDATE `city` SET `cityImg` = 'Miaoli.jpeg' WHERE `city`.`cityId` = 8;
+UPDATE `city` SET `cityImg` = 'Penghu.jpeg' WHERE `city`.`cityId` = 9;
+UPDATE `city` SET `cityImg` = 'Taipeicity.jpeg' WHERE `city`.`cityId` = 10;
+UPDATE `city` SET `cityImg` = 'Hsinchu.jpeg' WHERE `city`.`cityId` = 11;
+UPDATE `city` SET `cityImg` = 'Hualien.jpeg' WHERE `city`.`cityId` = 12;
+UPDATE `city` SET `cityImg` = 'Kaohsiungcity.jpeg' WHERE `city`.`cityId` = 13;
+UPDATE `city` SET `cityImg` = 'Changhua.jpeg' WHERE `city`.`cityId` = 14;
+UPDATE `city` SET `cityImg` = 'Hsinchucity.jpeg' WHERE `city`.`cityId` = 15;
+UPDATE `city` SET `cityImg` = 'New Taipeicity.jpeg' WHERE `city`.`cityId` = 16;
+UPDATE `city` SET `cityImg` = 'Keelungcity.jpeg' WHERE `city`.`cityId` = 17;
+UPDATE `city` SET `cityImg` = 'Taichungcity.jpeg' WHERE `city`.`cityId` = 18;
+UPDATE `city` SET `cityImg` = 'Tainan.jpeg' WHERE `city`.`cityId` = 19;
+UPDATE `city` SET `cityImg` = 'Taoyuancity.jpeg' WHERE `city`.`cityId` = 20;
+UPDATE `city` SET `cityImg` = 'Chiayi.jpeg' WHERE `city`.`cityId` = 21;
+UPDATE `city` SET `cityImg` = 'Chiayicity.jpeg' WHERE `city`.`cityId` = 22;

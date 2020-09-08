@@ -43,10 +43,6 @@
                 
                 </div>
     <?php }else{?>
-                <div>
-                    <img src="./image/<?php echo $showImg["cityImg"]?>"
-                         srcset="small.jpg 500w"> 
-                </div>
                  <?php echo("親 這裡沒有觀測站喔");
         }
         

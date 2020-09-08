@@ -80,18 +80,18 @@
             TRUNCATE table oneweekweather;   
         sqlcommand;
         $resultweek = mysqli_query ( $link, $delete );
-        $deletecity = <<<sqlcommand
-            TRUNCATE table city;   
-        sqlcommand;
-        $resultcity = mysqli_query ( $link, $deletecity );
+        // $deletecity = <<<sqlcommand
+        //     TRUNCATE table city;   
+        // sqlcommand;
+        // $resultcity = mysqli_query ( $link, $deletecity );
         foreach($data["records"]["locations"][0]["location"] as $i){//一週天氣
             $city=$i["locationName"];
             
-            $getdate = <<<sqlcommand
-                INSERT INTO `city`(`city`, `cityImg`) VALUES ("$city","1");
+            // $getdate = <<<sqlcommand
+            //     INSERT INTO `city`(`city`, `cityImg`) VALUES ("$city","1");
                 
-            sqlcommand;
-            $result = mysqli_query ( $link, $getdate );
+            // sqlcommand;
+            // $result = mysqli_query ( $link, $getdate );
         
         for($k=0;$k<14;$k++){
             $description = $i["weatherElement"][0]["time"][$k]["elementValue"][0]["value"];
