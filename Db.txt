@@ -1,0 +1,30 @@
+create database weatherDB;
+
+create table tempNow(id int PRIMARY key AUTO_INCREMENT,cityid varchar(20),temp float,timeNow datetime);
+create table twodayweather(id int PRIMARY key AUTO_INCREMENT,cityid int,descriptionT int,Description varchar(50),startTime datetime,endTime datetime);
+create table rain(id int PRIMARY key AUTO_INCREMENT,cityId int,onehourRain float,onedayRain float,rainDate datetime	);
+create table oneweekweather(id int PRIMARY key AUTO_INCREMENT,cityid int,description varchar(15),MinT int,MaxT int,startTime datetime,endTime datetime	);
+create table city(id int PRIMARY key AUTO_INCREMENT,cityid int,cityImg varchar(20));
+
+INSERT INTO city(`cityid`,city,cityImg) VALUES ('1','雲林縣','Yunlin.jpeg');
+INSERT INTO city(`cityid`,city,cityImg) VALUES ('2','南投縣','Nantou.jpeg');
+INSERT INTO city(`cityid`,city,cityImg) VALUES ('3','連江縣','Lianjiang.jpeg');
+INSERT INTO city(`cityid`,city,cityImg) VALUES ('4','台東縣','Taitung.jpeg');
+INSERT INTO city(`cityid`,city,cityImg) VALUES ('5','金門縣','Kinmen.jpeg');
+INSERT INTO city(`cityid`,city,cityImg) VALUES ('6','宜蘭縣','Yilan.jpeg');
+INSERT INTO city(`cityid`,city,cityImg) VALUES ('7','屏東縣','Pingtung.jpeg');
+INSERT INTO city(`cityid`,city,cityImg) VALUES ('8','苗栗縣','Miaoli.jpeg');
+INSERT INTO city(`cityid`,city,cityImg) VALUES ('9','澎湖縣','Penghu.jpeg');
+INSERT INTO city(`cityid`,city,cityImg) VALUES ('10','台北市','Taipeicity.jpeg');
+INSERT INTO city(`cityid`,city,cityImg) VALUES ('11','新竹縣','Hsinchu.jpeg');
+INSERT INTO city(`cityid`,city,cityImg) VALUES ('12','花蓮縣','Hualien.jpeg');
+INSERT INTO city(`cityid`,city,cityImg) VALUES ('13','高雄市','Kaohsiungcity.jpeg');
+INSERT INTO city(`cityid`,city,cityImg) VALUES ('14','彰化縣','Changhua.jpeg');
+INSERT INTO city(`cityid`,city,cityImg) VALUES ('15','新竹市','Hsinchucity.jpeg');
+INSERT INTO city(`cityid`,city,cityImg) VALUES ('16','新北市','New Taipeicity.jpeg');
+INSERT INTO city(`cityid`,city,cityImg) VALUES ('17','基隆市','Keelungcity.jpeg');
+INSERT INTO city(`cityid`,city,cityImg) VALUES ('18','台中市','Taichungcity.jpeg');
+INSERT INTO city(`cityid`,city,cityImg) VALUES ('19','台南縣','Tainan.jpeg');
+INSERT INTO city(`cityid`,city,cityImg) VALUES ('20','桃園市','Taoyuancity.jpeg');
+INSERT INTO city(`cityid`,city,cityImg) VALUES ('21','嘉義縣','Chiayi.jpeg');
+INSERT INTO city(`cityid`,city,cityImg) VALUES ('22','嘉義市','Chiayicity.jpeg');
